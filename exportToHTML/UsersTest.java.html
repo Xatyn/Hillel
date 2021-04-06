@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>UsersTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+UsersTest.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span>org.junit.Assert;
+<span class="s0">import </span>org.junit.Test;
+<span class="s0">import </span>org.openqa.selenium.By;
+<span class="s0">import </span>org.openqa.selenium.WebDriver;
+<span class="s0">import </span>org.openqa.selenium.WebElement;
+<span class="s0">import </span>org.openqa.selenium.chrome.ChromeDriver;
+
+<span class="s0">import </span>java.sql.Driver;
+<span class="s0">import </span>java.util.concurrent.TimeUnit;
+
+<span class="s0">public class </span>UsersTest
+{
+ <span class="s0">public static </span>WebDriver driver;
+  @Test <span class="s2">//Начало теста</span>
+ <span class="s0">public void </span>login() <span class="s0">throws </span>InterruptedException
+ {
+  System.setProperty(<span class="s3">&quot;webdriver.chrome.driver&quot;</span>, <span class="s3">&quot;C:</span><span class="s0">\\</span><span class="s3">chromdriver</span><span class="s0">\\</span><span class="s3">chromedriver.exe&quot;</span>);
+  driver=<span class="s0">new </span>ChromeDriver();
+    driver.manage().window().maximize();
+    driver.manage().timeouts().implicitlyWait(<span class="s4">30</span>, TimeUnit.SECONDS);
+
+    <span class="s2">//Вход на сайт и в аккаунт</span>
+    driver.get(<span class="s3">&quot;http://users.bugred.ru/user/login/index.html&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;login&quot;</span>)).sendKeys(<span class="s3">&quot;xatyn@ya.ua&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;password&quot;</span>)).sendKeys(<span class="s3">&quot;test1501&quot;</span>);
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[3]/div[1]/div[1]/form/table/tbody/tr[3]/td[2]/input&quot;</span>)).click();
+
+    <span class="s2">//Проверка работоспособности кнопки</span>
+    WebElement PoiskButton=driver.findElement(By.xpath(<span class="s3">&quot;//a[contains(text(),'Добавить пользователя')]&quot;</span>));
+    Assert.assertEquals(<span class="s0">true</span>, PoiskButton.isDisplayed());
+
+    <span class="s2">//Поиск пользователя</span>
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[3]/form/table/tbody/tr[4]/td/input&quot;</span>)).sendKeys(<span class="s3">&quot;xatyntester5@ya.ua&quot;</span>);
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[3]/form/table/tbody/tr[5]/td[1]/button&quot;</span>)).click();
+
+    <span class="s2">//Добавить нового пользователя</span>
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[3]/p[1]/a&quot;</span>)).click();
+    driver.findElement(By.name(<span class="s3">&quot;noibiz_name&quot;</span>)).sendKeys(<span class="s3">&quot;xatyntester6&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;noibiz_email&quot;</span>)).sendKeys(<span class="s3">&quot;xatyntester6@ya.ua&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;noibiz_password&quot;</span>)).sendKeys(<span class="s3">&quot;test1501&quot;</span>);
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[3]/form/table/tbody/tr[21]/td[2]/input&quot;</span>)).click();
+
+    <span class="s2">//изменение в личном кабинете</span>
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[1]/div[2]/ul/li[3]&quot;</span>)).click();
+    driver.findElement(By.xpath(<span class="s3">&quot;//*[@id=</span><span class="s0">\&quot;</span><span class="s3">fat-menu</span><span class="s0">\&quot;</span><span class="s3">]/ul/li[1]/a&quot;</span>)).click();
+    driver.findElement(By.name(<span class="s3">&quot;name&quot;</span>)).sendKeys(<span class="s3">&quot;Other&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;gender&quot;</span>)).sendKeys(<span class="s3">&quot;мужской&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;birthday&quot;</span>)).sendKeys(<span class="s3">&quot;01.01.2000&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;date_start&quot;</span>)).sendKeys(<span class="s3">&quot;10.10.2021&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;hobby&quot;</span>)).sendKeys(<span class="s3">&quot;Хобби-бобби&quot;</span>);
+    driver.findElement(By.name(<span class="s3">&quot;inn&quot;</span>)).sendKeys(<span class="s3">&quot;123456789012&quot;</span>);
+    driver.findElement(By.xpath(<span class="s3">&quot;/html/body/div[3]/div[1]/div/div[2]/form/table/tbody/tr[8]/td[2]/input&quot;</span>)).click();
+
+     }
+}
+</pre>
+</body>
+</html>
